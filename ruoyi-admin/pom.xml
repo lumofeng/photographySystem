@@ -61,6 +61,18 @@
             <artifactId>ruoyi-generator</artifactId>
         </dependency>
 
+        <!--学生模块-->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-student</artifactId>
+        </dependency>
+
+        <!--拍摄模块-->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoiyi-shoot</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

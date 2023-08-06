@@ -87,7 +87,7 @@ export const constantRoutes = [
         meta: { title: '个人中心', icon: 'user' }
       }
     ]
-  }
+  },
 ]
 
 // 动态路由，基于用户权限动态去加载
@@ -100,7 +100,8 @@ export const dynamicRoutes = [
     children: [
       {
         path: 'role/:userId(\\d+)',
-        component: () => import('@/views/system/user/authRole'),
+        // component: () => import('@/views/system/user/authRole'),
+        component: (resolve) => require(['@/views/system/user/authRole'],resolve),
         name: 'AuthRole',
         meta: { title: '分配角色', activeMenu: '/system/user' }
       }

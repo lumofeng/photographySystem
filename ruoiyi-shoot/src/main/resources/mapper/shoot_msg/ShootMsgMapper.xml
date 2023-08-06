@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.shoot.mapper.ShootMsgMapper">
+    
+    <resultMap type="ShootMsg" id="ShootMsgResult">
+        <result property="photoId"    column="photo_id"    />
+        <result property="title"    column="title"    />
+        <result property="shootName"    column="shoot_name"    />
+        <result property="description"    column="description"    />
+        <result property="shootType"    column="shoot_type"    />
+        <result property="shootEquipment"    column="shoot_equipment"    />
+        <result property="shootLocation"    column="shoot_location"    />
+        <result property="isDelete"    column="is_delete"    />
+        <result property="remark"    column="remark"    />
+        <result property="shootDate"    column="shoot_date"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectShootMsgVo">
+        select photo_id, title, shoot_name, description, shoot_type, shoot_equipment, shoot_location, is_delete, remark, shoot_date, create_time, update_time from shoot_msg
+    </sql>
+
+    <select id="selectShootMsgList" parameterType="ShootMsg" resultMap="ShootMsgResult">
+        <include refid="selectShootMsgVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="shootName != null  and shootName != ''"> and shoot_name like concat('%', #{shootName}, '%')</if>
+            <if test="description != null  and description != ''"> and description = #{description}</if>
+            <if test="shootType != null  and shootType != ''"> and shoot_type = #{shootType}</if>
+            <if test="shootEquipment != null  and shootEquipment != ''"> and shoot_equipment = #{shootEquipment}</if>
+            <if test="shootLocation != null  and shootLocation != ''"> and shoot_location = #{shootLocation}</if>
+            <if test="shootDate != null "> and shoot_date = #{shootDate}</if>
+        </where>
+    </select>
+    
+    <select id="selectShootMsgByPhotoId" parameterType="Long" resultMap="ShootMsgResult">
+        <include refid="selectShootMsgVo"/>
+        where photo_id = #{photoId}
+    </select>
+        
+    <insert id="insertShootMsg" parameterType="ShootMsg" useGeneratedKeys="true" keyProperty="photoId">
+        insert into shoot_msg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null">title,</if>
+            <if test="shootName != null">shoot_name,</if>
+            <if test="description != null">description,</if>
+            <if test="shootType != null">shoot_type,</if>
+            <if test="shootEquipment != null">shoot_equipment,</if>
+            <if test="shootLocation != null">shoot_location,</if>
+            <if test="isDelete != null">is_delete,</if>
+            <if test="remark != null">remark,</if>
+            <if test="shootDate != null">shoot_date,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null">#{title},</if>
+            <if test="shootName != null">#{shootName},</if>
+            <if test="description != null">#{description},</if>
+            <if test="shootType != null">#{shootType},</if>
+            <if test="shootEquipment != null">#{shootEquipment},</if>
+            <if test="shootLocation != null">#{shootLocation},</if>
+            <if test="isDelete != null">#{isDelete},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="shootDate != null">#{shootDate},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateShootMsg" parameterType="ShootMsg">
+        update shoot_msg
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null">title = #{title},</if>
+            <if test="shootName != null">shoot_name = #{shootName},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="shootType != null">shoot_type = #{shootType},</if>
+            <if test="shootEquipment != null">shoot_equipment = #{shootEquipment},</if>
+            <if test="shootLocation != null">shoot_location = #{shootLocation},</if>
+            <if test="isDelete != null">is_delete = #{isDelete},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="shootDate != null">shoot_date = #{shootDate},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where photo_id = #{photoId}
+    </update>
+
+    <delete id="deleteShootMsgByPhotoId" parameterType="Long">
+        delete from shoot_msg where photo_id = #{photoId}
+    </delete>
+
+    <delete id="deleteShootMsgByPhotoIds" parameterType="String">
+        delete from shoot_msg where photo_id in 
+        <foreach item="photoId" collection="array" open="(" separator="," close=")">
+            #{photoId}
+        </foreach>
+    </delete>
+</mapper>
