@@ -1,5 +1,13 @@
 import request from '@/utils/request'
 
+// 查询学生兴趣
+export function listStudentHobby() {
+  return request({
+    url: '/manage/student/pie',
+    method: 'get',
+  })
+}
+
 // 查询学生信息列表
 export function listStudent(query) {
   return request({

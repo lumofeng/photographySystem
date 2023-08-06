@@ -1,7 +1,6 @@
 <template>
   <div style="margin: 0 auto;">
-<!--    <div class="echart" id="mychart" :style="eChartStyle"></div>-->
-    <div id="myChart" :style="myChartStyle"></div>
+    <div class="echart" id="mychart" :style="eChartStyle"></div>
   </div>
 </template>
 
@@ -52,47 +51,17 @@ export default {
     };
   },
   mounted() {
-    listStudentHobby().then(response => {
-      // 基于准备好的dom，初始化echarts实例
-      let myChart = echarts.init(document.getElementById('myChart'))
-      // 绘制图表
-      myChart.setOption({
-        title: {
-          text: '学生兴趣分布',
-          left: 'center'
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
-        },
-        legend: {
-          top: 'bottom'
-        },
-        toolbox: {
-          show: true,
-          feature: {
-            mark: { show: true },
-            dataView: { show: true, readOnly: false },
-            restore: { show: true },
-            saveAsImage: { show: true }
-          }
-        },
-        series: [
-          {
-            name: 'Nightingale Chart',
-            type: 'pie',
-            radius: [50, 250],
-            center: ['50%', '50%'],
-            roseType: 'area',
-            itemStyle: {
-              borderRadius: 8
-            },
-            data: response.data
-          }
-        ]
-      })
-      console.log(response.data)
-    })
+    // 图表初始化
+    this.myChart = echarts.init(document.getElementById("mychart"));
+    // 数据初始化
+    for (let i = 0; i < 5; ++i) {
+      this.sortData.push(Math.round(Math.random() * 200));
+    }
+    // 数据刷新
+    setInterval(() => {
+      this.pageUpdate();
+    }, 3000);
+
   },
   methods: {
     // 数据刷新

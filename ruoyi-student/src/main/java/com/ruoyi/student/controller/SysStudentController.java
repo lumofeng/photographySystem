@@ -1,7 +1,10 @@
 package com.ruoyi.student.controller;
 
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ruoyi.student.mapper.SysStudentMapper;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +37,14 @@ public class SysStudentController extends BaseController
     @Autowired
     private ISysStudentService sysStudentService;
 
+    @Autowired
+    private SysStudentMapper sysStudentMapper;
+
+    @GetMapping("/pie")
+    public AjaxResult pie(){
+        List<Map<Integer, String>> maps = sysStudentMapper.selectHobbyAndCount();
+        return AjaxResult.success(maps);
+    }
     /**
      * 查询学生信息列表
      */

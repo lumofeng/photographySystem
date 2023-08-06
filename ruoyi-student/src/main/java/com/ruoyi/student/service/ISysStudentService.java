@@ -1,6 +1,8 @@
 package com.ruoyi.student.service;
 
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.student.domain.SysStudent;
 
 /**
@@ -58,4 +60,6 @@ public interface ISysStudentService
      * @return 结果
      */
     public int deleteSysStudentByStudentId(Long studentId);
+
+    //List<Map<Integer, String>> selectHobbyAndCount();
 }

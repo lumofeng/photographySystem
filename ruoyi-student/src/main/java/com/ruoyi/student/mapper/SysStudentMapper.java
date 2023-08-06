@@ -1,7 +1,10 @@
 package com.ruoyi.student.mapper;
 
 import java.util.List;
+import java.util.Map;
+
 import com.ruoyi.student.domain.SysStudent;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 学生信息Mapper接口
@@ -58,4 +61,11 @@ public interface SysStudentMapper
      * @return 结果
      */
     public int deleteSysStudentByStudentIds(Long[] studentIds);
+
+    /**
+     * 各个兴趣及每个学生的数量
+     */
+    @Select("select student_hobby name, count(student_name) value from sys_student group by student_hobby")
+    List<Map<Integer, String>> selectHobbyAndCount();
+
 }

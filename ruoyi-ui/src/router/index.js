@@ -88,6 +88,12 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/pie',
+    component: () => import('@/views/Pie'),
+    name: 'Pie'
+  },
+
 ]
 
 // 动态路由，基于用户权限动态去加载
